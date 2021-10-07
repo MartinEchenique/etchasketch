@@ -1,16 +1,14 @@
 function generateGrid(size){
     let container = document.getElementById("grid-container")
-    for (let i = 0; i < size; i++) {
+    container.textContent = ""
+    container.style.gridTemplateColumns = `repeat(${size},auto)`;
+    let squaresAmount = size * size;
+    for (let i = 0; i < squaresAmount; i++) {
         let square = document.createElement("div");
+        square.addEventListener("mouseover", e=>changeColor(e.target));
         square.classList.add("grid-square");
         container.appendChild(square);
     }
-}
-function addEventHover(){
-    let squares = Array.from(document.getElementsByClassName("grid-square"));
-    squares.forEach(element => {
-        element.addEventListener("mouseover", e=>changeColor(e.target));
-});
 }
 
 function changeColor(square){
@@ -25,7 +23,6 @@ function changeColor(square){
         color = "black";
         break;
     case "gray-scale":
-        //color = window.getComputedStyle(square).backgroundColor.slice(4,7)-25.5||window.getComputedStyle(square).backgroundColor.slice(3,6)-25.5;
         color = window.getComputedStyle(square).backgroundColor.split(",").pop().trim().slice(-5,-1);
         color -=25.5;
         color = `rgb(${color},${color},${color})` 
@@ -44,6 +41,12 @@ function clearGrid(){
         element.style.backgroundColor = "white";
 });
 }
+
+function changeSize(){
+    let size = window.prompt("Screen size?")
+    if (size > 100) size = 100;
+    generateGrid(size)
+}
 document.getElementById("clear-grid").addEventListener("click",clearGrid);
-generateGrid(100);
-addEventHover();
+document.getElementById("change-size").addEventListener("click",changeSize);
+generateGrid(10);
