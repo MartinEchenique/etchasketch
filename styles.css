@@ -1,0 +1,23 @@
+body {
+  background-color: aqua;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+.grid-square {
+  background-color: white;
+  border: 1px solid black;
+}
+#grid-container {
+  display: grid;
+  grid-template-columns: repeat(10, auto);
+  width: 480px;
+  height: 480px;
+}
+#color-buttons-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  align-items: flex-end;
+}
